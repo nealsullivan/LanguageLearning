@@ -1,0 +1,29 @@
+#!perl
+
+use 5.012;
+
+say "greet fred";
+greet("fred");
+say "greet barney now";
+greet("barney");
+say "greet pebbles now";
+greet("pebbles");
+say "greet bambam now";
+greet("bambam");
+
+sub greet {
+	my $now = pop @_;
+	state @last;
+
+	say "Test: last = @last now = $now";
+	print "Oh hey $now; ";
+
+	if (defined @last) {
+		print "@last is/are here too!\n";
+	}
+	else {
+		print "you're the first one here!\n";
+	}
+
+	push @last, $now.",";
+}

@@ -1,0 +1,38 @@
+#!perl
+
+use 5.012;
+
+# Write a program that will ask for the user for a given name and report the corresponding family name.  
+# Use tha names of people you know, or (if you spend so much time on the computer that you don't know any)
+# use the following table:
+
+# Defining any big variables up here
+
+# main body
+
+my %hash = (
+	Neal => 'Sullivan',
+	NealG => 'Grabowski',
+	Joey => 'Rudas',
+	Emily => 'Doyle',);
+
+say 'Hey there, can you give me a name: "Neal", "NealG", "Joey", or "Emily"?';
+
+my $count = 3;
+
+while(chomp(my $value = <STDIN>)) {
+	if (exists $hash{$value}) {
+		say "You entered $value, super rad";
+		say "his/her family name is $hash{$value}";
+		last;	
+	} elsif ($count > 0) {
+		$count --;
+		say "Try again brochacho, you've got $count tries left";
+	} else {
+		say "3 strikes and you're out bruh.  Better luck next time";
+		last;
+	}
+	
+}
+
+say "quitting...";

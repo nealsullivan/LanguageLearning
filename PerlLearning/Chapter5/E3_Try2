@@ -1,0 +1,71 @@
+#!perl
+
+use 5.012;
+
+# DEFINE BIG VARIABLES UP HERE
+
+my $length;
+my @header;
+my $format;
+my @lines;
+
+# MAIN PROGRAM 'Do Stuff' BLOCK
+
+$length = &get_Width();
+
+@lines = &get_stuff();
+
+@header = map {$_ % 10} 1.."$length";
+
+$format = ("%"."$length"."s\n") x @lines;
+
+print "\n", @header, "\n";
+
+printf $format, @lines;
+
+print "\nPlease try again by running the program again sometime!\n";
+
+# SubRoutine DEFINITIONS
+
+sub counter {
+	state $count;
+
+	$count += 1;
+
+	if ($count < 3) {
+		return 1
+	}
+	else {
+		return 0
+	}
+}
+
+sub get_Width {
+	print "Please enter a integer for the row width\n";
+
+	my $counter = 1;
+
+	while (chomp(my $line = <STDIN>) && $counter) {
+		if ($line =~ /^[\d]+$/) {
+			print "column width set to $line\n";
+			return $line;
+		}
+		elsif ($counter > 3) {
+			print "You've had 3 tries.  Please try again by running program again";
+		}
+		else {
+			$counter = &counter;
+
+			print "You've entered $line\n";
+			print "Counter now = $counter\n", "Please enter a number\n";	
+		}
+	}
+}
+
+sub get_stuff {
+	print "Please give me some strings to print back.\n";
+
+	chomp(my @lines = <STDIN>);
+	@lines = sort @lines;
+	return @lines;
+}

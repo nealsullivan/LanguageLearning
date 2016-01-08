@@ -1,0 +1,85 @@
+#!perl
+
+use 5.012;
+
+# Write a program that will ask for the user for a given name and report the corresponding family name.  
+# Use tha names of peopl eyou know, or (if you spend so much time on the computer that you don't know any)
+# use the following table:
+
+# Defining any big variables up here
+
+# main body
+
+my %names = (
+	Neal => 'Sullivan',
+	Joey => 'Rudas',
+	Emily => 'Doyle',
+	Brett => 'Hogan',
+	NealG => 'Grabowski',
+);
+
+my $given = ask_For_Given();
+
+exists_In_Hash($given);
+
+# any SUB stuff down here
+
+sub ask_For_Given {
+	my $counter = 0;
+	my $input;
+
+	say "Please enter a given name.\n";
+	
+	chomp($input = <STDIN>);
+
+	while ($counter < 3) {
+
+		say "for debugging, counter = $counter.";
+
+		if ($input =~ /^[a-zA-z]+$/) {
+			say "\nThat was a name, super rad, thanks.\n";
+			return $input;
+		}
+		elsif ($counter < 2) {
+			$counter ++;
+			say "\nNot quite, I need a 'given name', like 'Joe' or 'Pete'.";
+			say "\nPlease enter a given name.\n";
+			chomp($input = <STDIN>);
+		}
+		elsif ($counter = 2) {
+			$counter ++;
+			say "\nOk, bub.  Last shot.  I need a given name, like 'Neal'.";
+			say "\nPlease enter a given name.\n";
+			chomp($input = <STDIN>);
+		}
+		else {
+			return;
+		}
+	}
+}
+
+sub exists_In_Hash {
+	if (defined (my $testName = shift @_)) {
+
+	say "for debugging, testName = $testName.";
+
+	if (exists $names{$testName}) {
+		if(defined $names{$testName}) {
+			say "The family name of $testName is $names{$testName}.";
+			return;
+		}
+		else {
+			say "We don't have a valid surname for $testName sorry, man.  Try again some other time.";
+			return;
+		}
+	}
+	else {
+		say "Sorry, brah, there doesn't seem to be a record for that 'given name', $testName.  Try again some time.";
+		return;
+	}
+	}
+	else {
+		say "Given name, undefined.";
+		return;
+	}
+}

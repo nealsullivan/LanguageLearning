@@ -1,0 +1,25 @@
+#!perl
+
+use 5.012;
+
+my $length;
+
+chomp(my @test = <>);
+
+my @header;
+
+my $format;
+
+if (($length = shift @test) ~= /^\d?/){
+	
+	@header = map {$_ % 10} 1.."$length";
+
+	$format = ("%"."$length"."s\n") x @test;	
+}
+else {
+	print "Please enter a number first, bro.  It won't work otherwise";
+}
+
+print @header, "\n";
+
+printf $format, @test;

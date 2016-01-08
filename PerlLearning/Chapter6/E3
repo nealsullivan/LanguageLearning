@@ -1,0 +1,15 @@
+#!perl
+
+use 5.012;
+
+my @keys;
+
+@keys = sort (@keys = keys %ENV);
+
+say "there are ".@keys." values in %ENV\n";
+
+foreach my $k (@keys) {
+	say "key $k | value $ENV{$k}";
+	}
+
+say "quitting...";

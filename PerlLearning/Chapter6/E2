@@ -1,0 +1,21 @@
+#!perl
+
+use 5.012;
+
+# Wirte a program that reads a series of words (with one word per line) until the end of input, 
+# then prints a summary of how many times each word was seen.
+
+my %input_words;
+
+while (chomp(my $input = <>)) {
+	say "You entered $input";
+	$input_words{$input} ++;
+}
+
+while ((my $key, my $value) = each %input_words) {
+	say "$key was seen $value times";
+}
+
+
+
+say "quitting...";
